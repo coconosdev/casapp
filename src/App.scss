@@ -1,0 +1,154 @@
+html{
+  // width: 100vw;
+  // height: 100vh;
+}
+
+nav {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+header {
+  h1 {
+    background-color: #333333;
+    color: #eaeaea;
+    margin: 0;
+    padding: 15px;
+  }
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+button{
+  border-radius: 0;
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
+  line-height: normal;
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+  -webkit-appearance: none;
+  outline: none;
+  &::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+  }
+
+  ///RESET END
+
+}
+
+.aqua-button {
+  position: relative;
+  border: 2px solid #00aeff;
+  color: #00aeff;
+  overflow: hidden;
+  border-radius: 5px;
+  max-width: 150px;
+  padding: 15px;
+  text-align: center;
+
+  &[disabled]{
+    background-color: #eaeaea;
+    border: 2px solid #888;
+    color: #888;
+  }
+
+  span {
+    position: relative;
+    z-index: 1;
+    transition: 1s;
+  }
+
+  .wave {
+    position: absolute;
+    top: calc(100% + 22px);
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #00aeff;
+    transition: 1s;
+
+    &:before{
+      content: '';
+      position: absolute;
+      top: -22px;
+      left: 0;
+      width: 100%;
+      height: 22px;
+      background: url('./img/wave.png');
+      animation: animate 0.5s linear infinite;
+    }
+  }
+  &:hover {
+    span {
+      color: #fff;
+    }
+    .wave {
+      top: 0;
+    }
+  }
+}
+
+@keyframes animate {
+  0%{
+    background-position-x: 0;
+  }
+  0%{
+    background-position-x: 118px;
+  }
+}
+
+nav {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+  a {
+    border: 1px solid #666;
+    background-color: #666;
+    text-decoration: none;
+    transition: 0.2s all ease-in-out;
+    font-weight: bold;
+    padding: 15px;
+    color: #fff;
+    &:hover{
+      text-decoration: none;
+      color: #666;
+      background-color: #eaeaea;
+    }
+  }
+}
+
+.agua-component {
+  li {
+    span {
+      color: red;
+      font-weight: bold;
+      &:hover{
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.input-wrapper {
+  margin-bottom: 30px;
+  button{
+   // margin-left: 15px;
+  }
+}
