@@ -3,9 +3,9 @@ import 'firebase/firestore';
 import 'firebase/auth';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyCSv0oSauxM_CO6pFV-37ifOxyTCcbkmok',
-  authDomain: 'casapp-d6e85.firebaseapp.com',
-  projectId: 'casapp-d6e85',
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
 };
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
@@ -77,3 +77,37 @@ export const streamPendientesList = (observer) => {
 };
 
 ////////////////PENDIENTES END
+
+////////////////AGUA START
+export const getAguaList = async () => {
+  const snapshot = await db.collection('agua').get();
+  return snapshot.docs.map((doc) => {
+    const data = doc.data();
+    const id = doc.id;
+    return { id, ...data };
+  });
+};
+
+export const addAgua = async (date) => {
+  const snapshot = await db.collection('agua').add({
+    date,
+  });
+  return snapshot;
+};
+
+export const updateAgua = async (id, date) => {
+  const snapshot = await db.collection('agua').doc(id).update({
+    date,
+  });
+  return snapshot;
+};
+export const deleteAgua = async (id) => {
+  const snapshot = await db.collection('agua').doc(id).delete();
+  return snapshot;
+};
+
+export const streamAguaList = (observer) => {
+  return db.collection('agua').onSnapshot(observer);
+};
+
+////////////////AGUA END

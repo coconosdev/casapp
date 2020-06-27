@@ -119,8 +119,8 @@ nav {
   justify-content: flex-start;
   margin-bottom: 20px;
   a {
-    border: 1px solid #666;
-    background-color: #666;
+    // border: 1px solid #666;
+    // background-color: #666;
     text-decoration: none;
     transition: 0.2s all ease-in-out;
     font-weight: bold;
@@ -151,4 +151,16 @@ nav {
   button{
    // margin-left: 15px;
   }
+}
+
+.mt-30{
+  margin-top: 30px;
+}
+
+.ml-15{
+  margin-left: 15px;
+}
+
+.p15 {
+  padding: 15px;
 }
