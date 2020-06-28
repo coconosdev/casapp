@@ -100,6 +100,7 @@ function Mandado() {
                 <TextField
                   name="nombre"
                   value={ele.nombre}
+                  fullWidth={true}
                   onChange={(e) => handleEdit(e, ele.id, ele.nombre)}
                 />
                 <Checkbox

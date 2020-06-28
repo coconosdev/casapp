@@ -13,6 +13,7 @@ import Paper from '@material-ui/core/Paper';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import Spinner from './Spinner';
 
 function Agua() {
   const [selectedDate, setSelectedDate] = useState('');
@@ -92,6 +93,7 @@ function Agua() {
           defaultValue=""
           name="fecha"
           onChange={handleDate}
+          className="input-date"
           InputLabelProps={{
             shrink: true,
           }}
@@ -107,41 +109,48 @@ function Agua() {
           +
         </Button>
       </Grid>
-      <TableContainer component={Paper} className="mt-30">
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Día</TableCell>
-              <TableCell>&nbsp;</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {waterDays.slice(-10).map((obj) => (
-              <TableRow key={obj.id}>
-                <TableCell>{moment(obj.date).format('dddd, LL')}</TableCell>
-                <TableCell>
-                  <DeleteIcon onClick={() => deleteDay(obj.id)} />
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      {waterDays.length > 1 && (
-        <Paper elevation={3} className="mt-30 p15">
-          <Typography variant="body1">
-            <b>Próxima predicción:</b>
-          </Typography>
-          <Typography variant="body2">
-            {moment(waterDays.slice(-1)[0].date)
-              .add(getAverageDifference(waterDays), 'days')
-              .format('dddd, LL')}
-          </Typography>
-          <Typography variant="body2">
-            En {getAverageDifference(waterDays)} día
-            {getAverageDifference(waterDays) > 1 ? 's' : ''}
-          </Typography>
-        </Paper>
+
+      {!waterDays.length ? (
+        <Spinner />
+      ) : (
+        <>
+          <TableContainer component={Paper} className="mt-30">
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Día</TableCell>
+                  <TableCell>&nbsp;</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {waterDays.slice(-10).map((obj) => (
+                  <TableRow key={obj.id}>
+                    <TableCell>{moment(obj.date).format('dddd, LL')}</TableCell>
+                    <TableCell>
+                      <DeleteIcon onClick={() => deleteDay(obj.id)} />
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          {waterDays.length > 1 && (
+            <Paper elevation={3} className="mt-30 p15">
+              <Typography variant="body1">
+                <b>Próxima predicción:</b>
+              </Typography>
+              <Typography variant="body2">
+                {moment(waterDays.slice(-1)[0].date)
+                  .add(getAverageDifference(waterDays), 'days')
+                  .format('dddd, LL')}
+              </Typography>
+              <Typography variant="body2">
+                En {getAverageDifference(waterDays)} día
+                {getAverageDifference(waterDays) > 1 ? 's' : ''}
+              </Typography>
+            </Paper>
+          )}
+        </>
       )}
     </div>
   );

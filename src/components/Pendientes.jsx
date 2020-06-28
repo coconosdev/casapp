@@ -100,6 +100,7 @@ function Pendientes() {
                 <TextField
                   name="name"
                   value={ele.name}
+                  fullWidth={true}
                   onChange={(e) => handleEdit(e, ele.id, ele.name)}
                 />
                 <Checkbox
