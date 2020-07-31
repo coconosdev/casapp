@@ -20,9 +20,10 @@ export const getTodoList = async () => {
   });
 };
 
-export const addTodo = async (nombre) => {
+export const addTodo = async (nombre, order) => {
   const snapshot = await db.collection('todos').add({
     nombre,
+    order,
   });
   return snapshot;
 };

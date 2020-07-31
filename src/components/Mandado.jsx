@@ -88,7 +88,7 @@ function Mandado() {
 
   const addTodo = (nombre) => {
     setLocalTodo('');
-    FirestoreService.addTodo(nombre)
+    FirestoreService.addTodo(nombre, todoList.length)
       .then(() => {})
       .catch((e) => console.log('error masivo create', e));
   };
