@@ -1,4 +1,6 @@
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -12,8 +14,8 @@ nav {
 
   .active-nav {
     position: relative;
-    &::before{
-      content: "";
+    &::before {
+      content: '';
       position: absolute;
       bottom: 0;
       left: 0;
@@ -38,9 +40,7 @@ main {
   padding: 15px;
 }
 
-
-
-button{
+button {
   border-radius: 0;
   border: none;
   margin: 0;
@@ -62,7 +62,6 @@ button{
   }
 
   ///RESET END
-
 }
 
 .aqua-button {
@@ -75,7 +74,7 @@ button{
   padding: 15px;
   text-align: center;
 
-  &[disabled]{
+  &[disabled] {
     background-color: #eaeaea;
     border: 2px solid #888;
     color: #888;
@@ -96,7 +95,7 @@ button{
     background: #00aeff;
     transition: 1s;
 
-    &:before{
+    &:before {
       content: '';
       position: absolute;
       top: -22px;
@@ -118,10 +117,10 @@ button{
 }
 
 @keyframes animate {
-  0%{
+  0% {
     background-position-x: 0;
   }
-  0%{
+  0% {
     background-position-x: 118px;
   }
 }
@@ -138,7 +137,7 @@ nav {
     font-weight: bold;
     padding: 15px;
     color: #fff;
-    &:hover{
+    &:hover {
       text-decoration: none;
       color: #666;
       background-color: #eaeaea;
@@ -157,11 +156,15 @@ nav {
   width: 95%;
 }
 
-.mt-30{
+.mt-30 {
   margin-top: 30px;
 }
 
-.ml-15{
+.mt-15 {
+  margin-top: 15px;
+}
+
+.ml-15 {
   margin-left: 15px;
 }
 

@@ -20,11 +20,15 @@ const grid = 8;
 
 const getItemStyle = (isDragging, draggableStyle) => ({
   userSelect: 'none',
-  padding: grid * 2,
+  padding: `10px 15px`,
   margin: `0 0 ${grid}px 0`,
   border: '1px solid #eaeaea',
   borderRadius: '5px',
   background: isDragging ? '#eaeaea' : 'transparent',
+  display: 'flex',
+  flexFlow: 'row nowrap',
+  alignItems: 'center',
+  justifyContent: 'center',
   ...draggableStyle,
 });
 
@@ -154,7 +158,7 @@ function Mandado() {
               </Button>
             </Grid>
           </Grid>
-          <div className="mt-30">
+          <div className="mt-15">
             <DragDropContext onDragEnd={onDragEnd}>
               <Droppable droppableId="droppable">
                 {(provided, snapshot) => (
