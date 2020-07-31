@@ -7,6 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import DragIndicatorIcon from '@material-ui/icons/DragIndicator';
 
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
@@ -32,11 +33,15 @@ const getItemStyle = (isDragging, draggableStyle) => ({
   ...draggableStyle,
 });
 
-const getListStyle = (isDraggingOver) => ({
-  background: isDraggingOver ? 'lightblue' : 'transparent',
-  padding: grid,
-  width: '100%',
-});
+const getListStyle = (isDraggingOver, elems) => {
+  return {
+    borderRadius: '5px',
+    background: isDraggingOver ? 'lightblue' : 'transparent',
+    padding: grid,
+    width: '100%',
+    height: `${elems * 72 + grid}px`,
+  };
+};
 
 function Mandado() {
   const [todoList, setTodoList] = useState();
@@ -165,7 +170,10 @@ function Mandado() {
                   <div
                     {...provided.droppableProps}
                     ref={provided.innerRef}
-                    style={getListStyle(snapshot.isDraggingOver)}
+                    style={getListStyle(
+                      snapshot.isDraggingOver,
+                      todoList.length
+                    )}
                   >
                     {todoList.sort(orderTodos).map((item, index) => (
                       <Draggable
@@ -203,6 +211,7 @@ function Mandado() {
                               color="primary"
                               onChange={() => deleteTodo(item.id)}
                             />
+                            <DragIndicatorIcon />
                           </Box>
                         )}
                       </Draggable>
