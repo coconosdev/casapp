@@ -3,7 +3,7 @@ import Nav from '../components/Nav';
 
 const Header = () => (
   <header>
-    <h1>CasApp</h1>
+    {/* <h1>CasApp</h1> */}
     <Nav></Nav>
   </header>
 );

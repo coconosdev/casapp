@@ -27,9 +27,10 @@ export const addTodo = async (nombre) => {
   return snapshot;
 };
 
-export const updateTodo = async (id, nombre) => {
+export const updateTodo = async (id, nombre, order) => {
   const snapshot = await db.collection('todos').doc(id).update({
     nombre,
+    order,
   });
   return snapshot;
 };

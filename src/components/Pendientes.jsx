@@ -86,8 +86,6 @@ function Pendientes() {
             </Grid>
           </Grid>
           <div>
-            <p>Lista de Pendientes:</p>
-
             {PendientesList.map((ele, index) => (
               <Box
                 display="flex"
