@@ -6,6 +6,10 @@
   padding: 0;
 }
 
+img {
+  max-width: 100%;
+}
+
 nav {
   display: flex;
   flex-flow: row nowrap;

@@ -18,6 +18,9 @@ import Spinner from './Spinner';
 function Agua() {
   const [selectedDate, setSelectedDate] = useState('');
   const [waterDays, setWaterDays] = useState([]);
+  let diaQueCae;
+  let diaQueCaePrint;
+  let diasRestantes;
 
   useEffect(() => {
     const unsubscribe = FirestoreService.streamAguaList({
@@ -79,6 +82,16 @@ function Agua() {
     return 0;
   };
 
+  if (waterDays.length) {
+    const todayDate = moment(new Date());
+    diaQueCae = moment(waterDays.slice(-1)[0].date).add(
+      getAverageDifference(waterDays),
+      'days'
+    );
+    diaQueCaePrint = diaQueCae.format('dddd, LL');
+    diasRestantes = diaQueCae.diff(todayDate, 'days');
+  }
+
   return (
     <div className="agua-component">
       <Grid
@@ -139,14 +152,19 @@ function Agua() {
               <Typography variant="body1">
                 <b>Próxima predicción:</b>
               </Typography>
+              <Typography variant="body2">{diaQueCaePrint}</Typography>
               <Typography variant="body2">
-                {moment(waterDays.slice(-1)[0].date)
-                  .add(getAverageDifference(waterDays), 'days')
-                  .format('dddd, LL')}
-              </Typography>
-              <Typography variant="body2">
-                En {getAverageDifference(waterDays)} día
-                {getAverageDifference(waterDays) > 1 ? 's' : ''}
+                {diasRestantes > 0 ? (
+                  <>
+                    En {diasRestantes} día
+                    {diasRestantes > 1 ? 's' : ''}
+                  </>
+                ) : (
+                  <img
+                    src="https://media1.tenor.com/images/2be175ae1351459c8f52cfd8479a4449/tenor.gif"
+                    alt=""
+                  />
+                )}
               </Typography>
             </Paper>
           )}
