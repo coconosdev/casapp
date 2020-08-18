@@ -133,6 +133,12 @@ function Mandado() {
     setTodoList(updatedTodos);
   };
 
+  const handleKey = (e) => {
+    if (e.charCode === 13) {
+      addTodo(localTodo);
+    }
+  };
+
   return (
     <div className="mandado-component">
       {!todoList ? (
@@ -145,6 +151,7 @@ function Mandado() {
                 name="nombre"
                 value={localTodo}
                 onChange={handleChange}
+                onKeyPress={handleKey}
                 label="Cosa"
                 variant="outlined"
                 size="small"
