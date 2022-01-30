@@ -56,16 +56,18 @@ export const getPendientesList = async () => {
   });
 };
 
-export const addPendientes = async (name) => {
+export const addPendientes = async (name, order) => {
   const snapshot = await db.collection('pendientes').add({
     name,
+    order,
   });
   return snapshot;
 };
 
-export const updatePendientes = async (id, name) => {
+export const updatePendientes = async (id, name, order) => {
   const snapshot = await db.collection('pendientes').doc(id).update({
     name,
+    order,
   });
   return snapshot;
 };
