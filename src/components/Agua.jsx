@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import * as FirestoreService from '../services/firestore';
 import moment from 'moment';
+import 'moment/locale/es';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Table from '@material-ui/core/Table';
@@ -16,6 +17,7 @@ import Grid from '@material-ui/core/Grid';
 import Spinner from './Spinner';
 
 function Agua() {
+  moment.locale('es');
   const [selectedDate, setSelectedDate] = useState('');
   const [waterDays, setWaterDays] = useState([]);
   let diaQueCae;
@@ -71,8 +73,8 @@ function Agua() {
     arr = arr.slice(-10);
     if (arr.length > 1) {
       for (let i = 1; i < arr.length; i++) {
-        const prevDate = moment(arr[i - 1].date);
-        const date = moment(arr[i].date);
+        const prevDate = moment(arr[i - 1].date).startOf('day');
+        const date = moment(arr[i].date).startOf('day');
         const diff = date.diff(prevDate, 'days');
         avg += diff;
       }
@@ -83,13 +85,13 @@ function Agua() {
   };
 
   if (waterDays.length) {
-    const todayDate = moment(new Date());
-    diaQueCae = moment(waterDays.slice(-1)[0].date).add(
+    const todayDate = moment(new Date()).startOf('day');
+    diaQueCae = moment(waterDays.slice(-1)[0].date).startOf('day').add(
       getAverageDifference(waterDays),
       'days'
     );
-    diaQueCaePrint = diaQueCae.format('dddd, LL');
-    diasRestantes = diaQueCae.diff(todayDate, 'days');
+    diaQueCaePrint = diaQueCae.startOf('day').format('dddd, LL');
+    diasRestantes = diaQueCae.startOf('day').diff(todayDate, 'days');
   }
 
   return (
