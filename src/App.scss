@@ -178,3 +178,404 @@ nav {
 .container {
   padding: 0;
 }
+
+// ============================================================
+// Comidas (recetario) — fully responsive, no media-query soup
+// ============================================================
+$comidas-accent: #2dd4bf;
+$comidas-accent-soft: #ccfbf1;
+$comidas-accent-dark: #0f766e;
+$comidas-bg: #f8fafc;
+$comidas-card: #ffffff;
+$comidas-text: #0f172a;
+$comidas-muted: #64748b;
+$comidas-border: #e2e8f0;
+
+.comidas {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(8px, 2vw, 24px) 0;
+  color: $comidas-text;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  &-header {
+    margin-bottom: clamp(16px, 3vw, 28px);
+
+    h1 {
+      font-size: clamp(1.75rem, 5vw, 2.5rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin: 0;
+      background: linear-gradient(135deg, $comidas-accent-dark, $comidas-accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    p {
+      margin: 6px 0 0;
+      color: $comidas-muted;
+      font-size: clamp(0.9rem, 2vw, 1rem);
+    }
+  }
+
+  // Section tabs — pill row, scrollable on overflow
+  &-tabs {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 4px 2px 12px;
+    margin-bottom: clamp(12px, 2vw, 16px);
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  &-tab {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 18px;
+    border-radius: 999px;
+    border: 1px solid $comidas-border;
+    background: $comidas-card;
+    color: $comidas-text;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    white-space: nowrap;
+
+    &:hover {
+      border-color: $comidas-accent;
+      color: $comidas-accent-dark;
+    }
+
+    &.is-active {
+      background: linear-gradient(135deg, $comidas-accent, $comidas-accent-dark);
+      border-color: transparent;
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(45, 212, 191, 0.35);
+    }
+  }
+
+  &-tab-emoji {
+    font-size: 1.05rem;
+  }
+
+  // Search
+  &-search {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: min(100%, 480px);
+    margin-bottom: clamp(16px, 3vw, 24px);
+    background: $comidas-card;
+    border: 1px solid $comidas-border;
+    border-radius: 12px;
+    padding: 0 14px;
+    transition: all 0.18s ease;
+
+    &:focus-within {
+      border-color: $comidas-accent;
+      box-shadow: 0 0 0 3px $comidas-accent-soft;
+    }
+
+    input {
+      flex: 1;
+      border: none;
+      outline: none;
+      padding: 12px 8px;
+      font-size: 1rem;
+      background: transparent;
+      color: $comidas-text;
+      font-family: inherit;
+
+      &::placeholder {
+        color: $comidas-muted;
+      }
+    }
+  }
+
+  &-search-icon {
+    color: $comidas-muted;
+    display: flex;
+  }
+
+  // Recipe grid — responsive without breakpoints
+  &-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+    gap: clamp(12px, 2vw, 20px);
+  }
+
+  &-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: clamp(16px, 3vw, 22px);
+    background: $comidas-card;
+    border: 1px solid $comidas-border;
+    border-radius: 14px;
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+    font-family: inherit;
+
+    &:hover {
+      transform: translateY(-3px);
+      border-color: $comidas-accent;
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+
+      .comidas-card-arrow {
+        color: $comidas-accent-dark;
+        transform: translateX(3px);
+      }
+    }
+
+    &:focus-visible {
+      outline: none;
+      border-color: $comidas-accent;
+      box-shadow: 0 0 0 3px $comidas-accent-soft;
+    }
+  }
+
+  &-card-name {
+    font-size: clamp(0.95rem, 2vw, 1.05rem);
+    font-weight: 600;
+    color: $comidas-text;
+    line-height: 1.35;
+  }
+
+  &-card-arrow {
+    color: $comidas-muted;
+    flex: 0 0 auto;
+    transition: all 0.2s ease;
+    display: flex;
+  }
+
+  &-empty {
+    text-align: center;
+    color: $comidas-muted;
+    padding: 40px 16px;
+    font-size: 0.95rem;
+  }
+}
+
+// Modal — full-screen on mobile, centered on desktop
+.comidas-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 1300;
+  animation: comidas-fade 0.2s ease-out;
+  padding: 0;
+
+  @media (min-width: 640px) {
+    align-items: center;
+    padding: 24px;
+  }
+}
+
+.comidas-modal {
+  background: #fff;
+  width: 100%;
+  max-width: 720px;
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px 16px 0 0;
+  overflow: hidden;
+  animation: comidas-slide-up 0.25s ease-out;
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.2);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #0f172a;
+
+  @media (min-width: 640px) {
+    max-height: 90vh;
+    border-radius: 18px;
+    animation: comidas-pop 0.22s ease-out;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+  }
+
+  &-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    padding: clamp(18px, 3vw, 24px) clamp(18px, 3vw, 28px);
+    border-bottom: 1px solid #e2e8f0;
+    position: sticky;
+    top: 0;
+    background: #fff;
+    z-index: 2;
+
+    h2 {
+      margin: 0;
+      font-size: clamp(1.2rem, 3.5vw, 1.6rem);
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      line-height: 1.25;
+      flex: 1;
+    }
+  }
+
+  &-body {
+    overflow-y: auto;
+    padding: clamp(18px, 3vw, 28px);
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+.comidas-icon-btn {
+  flex: 0 0 auto;
+  width: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: none;
+  background: #f1f5f9;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.18s ease;
+
+  &:hover {
+    background: #e2e8f0;
+    color: #0f172a;
+  }
+}
+
+.comidas-segmented {
+  display: flex;
+  gap: 6px;
+  padding: 12px clamp(18px, 3vw, 28px);
+  background: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+
+  button {
+    flex: 1;
+    padding: 10px 16px;
+    border-radius: 10px;
+    border: none;
+    background: transparent;
+    color: #64748b;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    font-family: inherit;
+
+    &:hover {
+      color: #0f766e;
+    }
+
+    &.is-active {
+      background: #fff;
+      color: #0f766e;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+    }
+  }
+}
+
+.comidas-ingredients {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    position: relative;
+    padding: 10px 0 10px 26px;
+    border-bottom: 1px dashed #e2e8f0;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #334155;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 6px;
+      top: 18px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #2dd4bf;
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+.comidas-steps {
+  list-style: none;
+  counter-reset: step;
+  margin: 0;
+  padding: 0;
+
+  li {
+    counter-increment: step;
+    position: relative;
+    padding: 12px 0 14px 44px;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #334155;
+    border-bottom: 1px dashed #e2e8f0;
+
+    &::before {
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: 12px;
+      width: 30px;
+      height: 30px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #2dd4bf, #0f766e);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.85rem;
+      border-radius: 50%;
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+@keyframes comidas-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes comidas-slide-up {
+  from { transform: translateY(20px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes comidas-pop {
+  from { transform: scale(0.96); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}

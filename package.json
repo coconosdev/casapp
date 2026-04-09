@@ -14,12 +14,15 @@
     "firebase": "^7.15.4",
     "lodash": "^4.17.19",
     "moment": "^2.27.0",
-    "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-beautiful-dnd": "^13.0.0",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.1"
+    "react-scripts": "5.0.1",
+    "sass": "^1.77.0"
+  },
+  "engines": {
+    "node": ">=24.11.0"
   },
   "scripts": {
     "start": "react-scripts start",

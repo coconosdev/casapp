@@ -8,14 +8,8 @@ export default function Nav() {
     <nav>
       <AppBar position="static">
         <Toolbar>
-          <NavLink activeClassName="active-nav" exact to="/agua">
-            Agua
-          </NavLink>
-          <NavLink activeClassName="active-nav" exact to="/mandado">
-            Mandado
-          </NavLink>
-          <NavLink activeClassName="active-nav" exact to="/pendientes">
-            Pendientes
+          <NavLink activeClassName="active-nav" exact to="/">
+            Comidas
           </NavLink>
         </Toolbar>
       </AppBar>
